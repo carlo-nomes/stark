@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
-import { StarkActionBarConfig, StarkPaginationConfig, StarkTableColumnProperties, StarkTableFilter } from "@nationalbankbelgium/stark-ui";
+import { StarkAction, StarkPaginationConfig, StarkTableColumnProperties, StarkTableFilter } from "@nationalbankbelgium/stark-ui";
 
 const DUMMY_DATA: any[] = [
 	{ id: 1, title: { label: "first title (value: 1)", value: 1 }, description: "number one" },
@@ -18,22 +18,20 @@ const DUMMY_DATA: any[] = [
 ];
 
 @Component({
-	selector: "showcase-table-regular",
-	templateUrl: "./table-regular.component.html",
-	styleUrls: ["./table-regular.component.scss"]
+	selector: "showcase-table-with-custom-actions",
+	templateUrl: "./table-with-custom-actions.component.html",
+	styleUrls: ["./table-with-custom-actions.component.scss"]
 })
-export class TableRegularComponent implements OnInit {
+export class TableWithCustomActionsComponent implements OnInit {
 	public data: any[];
 
 	public columns: StarkTableColumnProperties[];
 
 	public filter: StarkTableFilter;
 
-	public order: string[];
-
 	public pagination: StarkPaginationConfig;
 
-	public rowActionBarConfig: StarkActionBarConfig;
+	public tableActions: StarkAction[];
 
 	public constructor(@Inject(STARK_LOGGING_SERVICE) private logger: StarkLoggingService) {}
 
@@ -41,29 +39,18 @@ export class TableRegularComponent implements OnInit {
 		this.data = DUMMY_DATA;
 
 		this.columns = [
-			{ name: "id", label: "Id", isFilterable: true, isSortable: true },
-			{
-				name: "title",
-				label: "Title",
-				cellFormatter: (value: any): string => "~" + value.label,
-				isFilterable: true,
-				isSortable: true,
-				compareFn: (n1: any, n2: any) => n1.value - n2.value
-			},
-			{ name: "description", label: "Description", isFilterable: true, isSortable: true }
+			{ name: "id", label: "Id" },
+			{ name: "title", label: "Title", cellFormatter: (value: any): string => "~" + value.label },
+			{ name: "description", label: "Description" }
 		];
 
-		this.order = ["title", "-description", "id"];
-
-		this.filter = { globalFilterPresent: true, columns: [] };
+		this.filter = { globalFilterPresent: false, columns: [] };
 
 		this.pagination = { totalItems: DUMMY_DATA.length, page: 1, itemsPerPage: 10 };
 
-		this.rowActionBarConfig = {
-			actions: [
-				{ id: "edit-item", label: "STARK.ICONS.EDIT_ITEM", icon: "pencil", actionCall: this.logger.debug, isEnabled: true },
-				{ id: "delete-item", label: "STARK.ICONS.DELETE_ITEM", icon: "delete", actionCall: this.logger.debug, isEnabled: false }
-			]
-		};
+		this.tableActions = [
+			{ id: "edit-item", label: "STARK.ICONS.EDIT_ITEM", icon: "pencil", actionCall: this.logger.debug, isEnabled: false },
+			{ id: "reload", label: "STARK.ICONS.RELOAD_PAGE", icon: "autorenew", actionCall: this.logger.debug, isEnabled: true }
+		];
 	}
 }
