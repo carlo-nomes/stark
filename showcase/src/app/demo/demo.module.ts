@@ -61,6 +61,7 @@ import { DemoTypographyComponent } from "./typography/demo-typography.component"
 import { DemoToastComponent } from "./toast/demo-toast-notification.component";
 import { SharedModule } from "../shared/shared.module";
 import { DEMO_STATES } from "./routes";
+import { DemoTableModule } from "./table/demo-table.module";
 
 @NgModule({
 	imports: [
@@ -97,7 +98,8 @@ import { DEMO_STATES } from "./routes";
 		StarkPrettyPrintModule,
 		StarkSliderModule,
 		StarkSvgViewBoxModule,
-		StarkTableModule
+		StarkTableModule,
+		DemoTableModule
 	],
 	declarations: [
 		DemoActionBarComponent,
@@ -122,7 +124,6 @@ import { DEMO_STATES } from "./routes";
 		DemoPrettyPrintComponent,
 		DemoSidebarComponent,
 		DemoSliderComponent,
-		DemoTableComponent,
 		DemoToastComponent,
 		DemoTypographyComponent
 	],
@@ -150,7 +151,8 @@ import { DEMO_STATES } from "./routes";
 		DemoSliderComponent,
 		DemoTableComponent,
 		DemoToastComponent,
-		DemoTypographyComponent
+		DemoTypographyComponent,
+		DemoTableComponent
 	],
 	providers: [{ provide: MAT_DATE_FORMATS, useValue: STARK_DATE_FORMATS }]
 })
