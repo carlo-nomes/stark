@@ -1,7 +1,8 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
-import { MAT_DATE_FORMATS } from "@angular/material/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MAT_DATE_FORMATS, MatOptionModule } from "@angular/material/core";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatButtonModule } from "@angular/material/button";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
@@ -13,6 +14,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
+import { StoreModule } from "@ngrx/store";
 import { TranslateModule } from "@ngx-translate/core";
 import { UIRouterModule } from "@uirouter/angular";
 import {
@@ -26,6 +28,7 @@ import {
 	StarkDatePickerModule,
 	StarkDateRangePickerModule,
 	StarkDropdownModule,
+	StarkGenericModule,
 	StarkKeyboardDirectivesModule,
 	StarkLanguageSelectorModule,
 	StarkMinimapModule,
@@ -44,6 +47,7 @@ import {
 	DemoDateRangePickerPageComponent,
 	DemoDropdownPageComponent,
 	DemoFooterPageComponent,
+	DemoGenericSearchPageComponent,
 	DemoKeyboardDirectivesPageComponent,
 	DemoLanguageSelectorPageComponent,
 	DemoLogoutPageComponent,
@@ -61,12 +65,18 @@ import { SharedModule } from "../shared/shared.module";
 import { DEMO_STATES } from "./routes";
 import {
 	TableRegularComponent,
-	TableWithSelectionComponent,
 	TableWithCustomActionsComponent,
-	TableWithTranscludedActionBarComponent,
+	TableWithCustomStylingComponent,
 	TableWithFixedHeaderComponent,
-	TableWithCustomStylingComponent
+	TableWithSelectionComponent,
+	TableWithTranscludedActionBarComponent
 } from "./components";
+import {
+	DEMO_GENERIC_SERVICE,
+	DemoGenericSearchFormComponent,
+	demoGenericSearchReducers,
+	DemoGenericServiceImpl
+} from "./pages/generic-search";
 
 @NgModule({
 	imports: [
@@ -75,6 +85,8 @@ import {
 		}),
 		CommonModule,
 		FormsModule,
+		ReactiveFormsModule,
+		MatAutocompleteModule,
 		MatButtonModule,
 		MatButtonToggleModule,
 		MatCardModule,
@@ -83,6 +95,7 @@ import {
 		MatFormFieldModule,
 		MatIconModule,
 		MatInputModule,
+		MatOptionModule,
 		MatTooltipModule,
 		MatSnackBarModule,
 		MatTabsModule,
@@ -97,6 +110,7 @@ import {
 		StarkDatePickerModule,
 		StarkDateRangePickerModule,
 		StarkDropdownModule,
+		StarkGenericModule,
 		StarkKeyboardDirectivesModule,
 		StarkLanguageSelectorModule,
 		StarkMinimapModule,
@@ -104,7 +118,8 @@ import {
 		StarkPrettyPrintModule,
 		StarkSliderModule,
 		StarkSvgViewBoxModule,
-		StarkTableModule
+		StarkTableModule,
+		StoreModule.forFeature("DemoGenericSearch", demoGenericSearchReducers)
 	],
 	declarations: [
 		DemoActionBarPageComponent,
@@ -115,6 +130,7 @@ import {
 		DemoDateRangePickerPageComponent,
 		DemoDropdownPageComponent,
 		DemoFooterPageComponent,
+		DemoGenericSearchPageComponent,
 		DemoKeyboardDirectivesPageComponent,
 		DemoLanguageSelectorPageComponent,
 		DemoLogoutPageComponent,
@@ -132,7 +148,8 @@ import {
 		TableWithTranscludedActionBarComponent,
 		TableWithFixedHeaderComponent,
 		TableWithCustomStylingComponent,
-		DemoToastPageComponent
+		DemoToastPageComponent,
+		DemoGenericSearchFormComponent
 	],
 	exports: [
 		DemoActionBarPageComponent,
@@ -143,6 +160,7 @@ import {
 		DemoDateRangePickerPageComponent,
 		DemoDropdownPageComponent,
 		DemoFooterPageComponent,
+		DemoGenericSearchPageComponent,
 		DemoKeyboardDirectivesPageComponent,
 		DemoLanguageSelectorPageComponent,
 		DemoLogoutPageComponent,
@@ -153,8 +171,12 @@ import {
 		DemoPrettyPrintPageComponent,
 		DemoSliderPageComponent,
 		DemoTablePageComponent,
-		DemoToastPageComponent
+		DemoToastPageComponent,
+		DemoGenericSearchFormComponent
 	],
-	providers: [{ provide: MAT_DATE_FORMATS, useValue: STARK_DATE_FORMATS }]
+	providers: [
+		{ provide: MAT_DATE_FORMATS, useValue: STARK_DATE_FORMATS },
+		{ provide: DEMO_GENERIC_SERVICE, useClass: DemoGenericServiceImpl }
+	]
 })
 export class DemoUiModule {}

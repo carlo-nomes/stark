@@ -116,6 +116,9 @@
         "INPUT2": "<b>helpPageUrl</b> contient l'url de la page d'aide.",
         "INPUT3": "Les éléments HTML inclus seront copiés dans le pied de page et affichés à gauche des autres éléments."
       },
+      "GENERIC_SEARCH": {
+        "TITLE": "Stark Generic Search"
+      },
       "HEADER": {
         "COPY_PASTE": "Ensuite il faut copier/coller ce bout de code HTML",
         "EXPLAINED": "Introduction",

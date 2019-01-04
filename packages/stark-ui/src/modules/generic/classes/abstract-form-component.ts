@@ -4,8 +4,8 @@ const _cloneDeep: Function = require("lodash/cloneDeep");
 const _isEqual: Function = require("lodash/isEqual");
 
 export abstract class AbstractStarkFormComponent<E> {
-	protected originalCopy: E;
-	protected workingCopy: E;
+	public originalCopy: E;
+	public workingCopy: E;
 
 	protected constructor(public logger: StarkLoggingService) {}
 

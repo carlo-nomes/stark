@@ -37,12 +37,15 @@ export interface StarkSearchFormComponent {
 }
 
 declare type UnusedLabelProps = "labelActivated" | "labelSwitchFunction";
+declare type UnusedIconProps = "iconActivated" | "iconSwitchFunction";
 declare type StarkDefaultPredefinedActionBarGenericAction = Required<
-	Pick<StarkDefaultPredefinedAction, Exclude<keyof StarkDefaultPredefinedAction, UnusedLabelProps>>
->;
+	Pick<StarkDefaultPredefinedAction, Exclude<keyof StarkDefaultPredefinedAction, UnusedLabelProps | UnusedIconProps>>
+> &
+	Pick<StarkDefaultPredefinedAction, UnusedIconProps>;
 declare type StarkCustomizablePredefinedActionBarGenericAction = Required<
-	Pick<StarkCustomizablePredefinedAction, Exclude<keyof StarkCustomizablePredefinedAction, UnusedLabelProps>>
->;
+	Pick<StarkCustomizablePredefinedAction, Exclude<keyof StarkCustomizablePredefinedAction, UnusedLabelProps | UnusedIconProps>>
+> &
+	Partial<Pick<StarkCustomizablePredefinedAction, UnusedIconProps>>;
 
 interface StarkGenericSearchActionBarConfigRequired extends StarkGenericSearchActionBarConfig, StarkActionBarConfig {
 	search: StarkDefaultPredefinedActionBarGenericAction;
@@ -149,10 +152,18 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 		super(renderer, elementRef);
 	}
 
+	/**
+	 * Component lifecycle hook
+	 */
 	public ngAfterContentInit(): void {
-		this.genericForm = this.searchFormComponent.searchForm;
+		if (typeof this.searchFormComponent !== "undefined") {
+			this.genericForm = this.searchFormComponent.searchForm;
+		}
 	}
 
+	/**
+	 * Component lifecycle hook
+	 */
 	public ngOnInit(): void {
 		this.normalizedFormButtonsConfig = this.normalizeFormButtonsConfig(this.formButtonsConfig);
 		this.normalizedFormActionBarConfig = this.normalizeFormActionBarConfig(this.formActionBarConfig);
@@ -161,6 +172,9 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 		this.logger.debug(componentName + ": component initialized");
 	}
 
+	/**
+	 * Component lifecycle hook
+	 */
 	public ngOnChanges(changesObj: SimpleChanges): void {
 		if (
 			changesObj["formButtonsConfig"] &&
@@ -268,11 +282,8 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 				icon: typeof actionConfig.icon !== "undefined" ? actionConfig.icon : defaultConfig.icon,
 				label: typeof actionConfig.label !== "undefined" ? actionConfig.label : defaultConfig.label,
 				isEnabled: typeof actionConfig.isEnabled !== "undefined" ? actionConfig.isEnabled : defaultConfig.isEnabled,
-				iconActivated: typeof actionConfig.iconActivated !== "undefined" ? actionConfig.iconActivated : defaultConfig.iconActivated,
-				iconSwitchFunction:
-					typeof actionConfig.iconSwitchFunction !== "undefined"
-						? actionConfig.iconSwitchFunction
-						: defaultConfig.iconSwitchFunction,
+				iconActivated: actionConfig.iconActivated,
+				iconSwitchFunction: actionConfig.iconSwitchFunction,
 				className: typeof actionConfig.className !== "undefined" ? actionConfig.className : defaultConfig.className,
 				buttonColor: typeof actionConfig.buttonColor !== "undefined" ? actionConfig.buttonColor : defaultConfig.buttonColor
 			};
@@ -287,11 +298,8 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 				label: typeof actionConfig.label !== "undefined" ? actionConfig.label : defaultConfig.label,
 				isEnabled: typeof actionConfig.isEnabled !== "undefined" ? actionConfig.isEnabled : defaultConfig.isEnabled,
 				isVisible: typeof actionConfig.isVisible !== "undefined" ? actionConfig.isVisible : defaultConfig.isVisible,
-				iconActivated: typeof actionConfig.iconActivated !== "undefined" ? actionConfig.iconActivated : defaultConfig.iconActivated,
-				iconSwitchFunction:
-					typeof actionConfig.iconSwitchFunction !== "undefined"
-						? actionConfig.iconSwitchFunction
-						: defaultConfig.iconSwitchFunction,
+				iconActivated: actionConfig.iconActivated,
+				iconSwitchFunction: actionConfig.iconSwitchFunction,
 				className: typeof actionConfig.className !== "undefined" ? actionConfig.className : defaultConfig.className,
 				buttonColor: typeof actionConfig.buttonColor !== "undefined" ? actionConfig.buttonColor : defaultConfig.buttonColor
 			};
@@ -303,8 +311,6 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 				icon: "magnify",
 				label: "STARK.ICONS.SEARCH",
 				isEnabled: true,
-				iconActivated: "",
-				iconSwitchFunction: () => false,
 				className: "",
 				buttonColor: "primary"
 			},
@@ -313,8 +319,6 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 				label: "STARK.ICONS.NEW_ITEM",
 				isEnabled: true,
 				isVisible: true,
-				iconActivated: "",
-				iconSwitchFunction: () => false,
 				className: "",
 				buttonColor: "primary"
 			},
@@ -323,8 +327,6 @@ export class StarkGenericSearchComponent extends AbstractStarkUiComponent implem
 				label: "STARK.ICONS.RESET",
 				isEnabled: true,
 				isVisible: true,
-				iconActivated: "",
-				iconSwitchFunction: () => false,
 				className: "",
 				buttonColor: "primary"
 			},

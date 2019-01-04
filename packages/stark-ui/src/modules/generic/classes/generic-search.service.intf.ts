@@ -5,7 +5,7 @@ export interface StarkGenericSearchService<T, E> {
 	/**
 	 * Prepares everything that is needed for creating a new item
 	 */
-	createNew(): void;
+	createNew?(): void;
 
 	/**
 	 * Fetch the current search state from Redux
