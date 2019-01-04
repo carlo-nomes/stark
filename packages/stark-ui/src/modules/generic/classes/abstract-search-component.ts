@@ -93,6 +93,7 @@ export abstract class AbstractStarkSearchComponent<T, E> extends AbstractStarkFo
 	 */
 	public onSearch(formGroup: FormGroup): void {
 		if (StarkFormUtil.isFormGroupValid(formGroup)) {
+			this.workingCopy = formGroup.getRawValue();
 			this.performSearch(this.workingCopy);
 		}
 	}
@@ -101,7 +102,9 @@ export abstract class AbstractStarkSearchComponent<T, E> extends AbstractStarkFo
 	 * Invoke the genericSearchService.createNew() method
 	 */
 	public onNew(): void {
-		this.genericSearchService.createNew();
+		if (typeof this.genericSearchService.createNew !== "undefined") {
+			this.genericSearchService.createNew();
+		}
 	}
 
 	/**
@@ -121,6 +124,9 @@ export abstract class AbstractStarkSearchComponent<T, E> extends AbstractStarkFo
 	public performSearch(searchCriteria: E = this.workingCopy): void {
 		this.performSearchOnInit = false; // prevent further automatic searches due to the subscription to StarkSearchState changes in NgOnInit
 
+		
+		console.log("----- typeof criteria ?", typeof searchCriteria);
+		console.log("---- criteria ?", searchCriteria);
 		// FIXME Uncomment this when progressService is implemented
 		// this.showProgress(true);
 

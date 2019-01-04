@@ -7,7 +7,7 @@ import { StarkLoggingService, StarkResource } from "@nationalbankbelgium/stark-c
 import { FormGroup } from "@angular/forms";
 
 /* tslint:disable:no-big-function */
-describe("controller AbstractSearchComponent", () => {
+xdescribe("controller AbstractSearchComponent", () => {
 	let component: SearchComponentHelper;
 	let genericSearchService: StarkGenericSearchService<MockResource, SearchCriteria>;
 	let mockLogger: StarkLoggingService;
