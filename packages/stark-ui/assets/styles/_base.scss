@@ -53,22 +53,26 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
+
     & .content-wrapper {
       flex: 1;
       display: flex;
       overflow-y: hidden;
       position: relative;
     }
+
     & .stark-app-menu {
       display: flex;
       flex-direction: column;
     }
+
     & main {
       flex: 1;
       display: flex;
       flex-direction: column;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
+
       & > ui-view {
         flex: 1 0 auto;
       }
@@ -138,10 +142,12 @@ td {
   overflow: hidden;
   border: solid 1px $divider-color;
   box-shadow: $elevation-2;
+
   & header {
     padding: 16px;
     background: mat-color(map-get($base-theme, primary-palette), 900) url(/assets/images/app-header.png) top right no-repeat;
     border-radius: 2px 2px 0 0;
+
     & i {
       margin: auto;
       display: block;
@@ -151,6 +157,7 @@ td {
       background-size: 100% 100%;
     }
   }
+
   & content {
     display: block;
     padding: 16px;
@@ -189,30 +196,25 @@ td {
 }
 
 /* stark-layout */
+$stark-layout-spacing: 15px;
 .stark-layout {
-  display: block;
-  margin-right: 0;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+
+  margin: -$stark-layout-spacing;
 
   > * {
-    display: block;
-    margin-right: 0;
-  }
-}
+    flex: 1;
+    margin: $stark-layout-spacing;
+    box-sizing: border-box;
 
-@media #{$tablet-query} {
-  .stark-layout {
-    display: flex;
-    flex-wrap: wrap;
-    /*margin-right: -30px;*/
-    /*justify-content: space-between;*/
+    mat-form-field {
+      width: 100%;
+    }
 
-    > * {
-      box-sizing: border-box;
-      flex: 1;
-      margin-right: 30px;
-      &:last-child{
-        margin-right: initial;
-      }
+    @media #{$mobile-only-query} {
+      min-width: calc(100% - (#{$stark-layout-spacing} * 2));
     }
   }
 }
@@ -228,75 +230,95 @@ button:not([disabled]),
     line-height: 32px;
     background-color: #fff;
     padding: 0 4px;
+
     &:active,
     &:hover {
       background-color: $offwhite;
     }
   }
+
   &.stark-outline {
     padding: -1px 4px;
     border-style: solid;
     border-width: 2px;
+
     &.mat-primary {
       border-color: $md-primary;
       color: $md-primary;
+
       & svg {
         fill: $md-primary;
       }
     }
+
     &.mat-accent {
       border-color: $md-accent;
       color: $md-accent;
+
       & svg {
         fill: $md-accent;
       }
     }
+
     &.mat-warn {
       border-color: $md-warn;
       color: $md-warn;
+
       & svg {
         fill: $md-warn;
       }
     }
+
     &.mat-alert {
       border-color: mat-color($alert-palette, 500);
       color: mat-color($alert-palette, 500);
+
       & svg {
         fill: mat-color($alert-palette, 500);
       }
     }
+
     &.mat-alt {
       border-color: mat-color($grey-palette, 900);
       color: mat-color($grey-palette, 900);
+
       & svg {
         fill: mat-color($grey-palette, 900);
       }
     }
+
     &.mat-neutral {
       border-color: mat-color($grey-palette, 400);
       color: mat-color($grey-palette, 400);
+
       & svg {
         fill: mat-color($grey-palette, 400);
       }
     }
+
     &.mat-success {
       border-color: mat-color($success-palette, 500);
       color: mat-color($success-palette, 500);
+
       & svg {
         fill: mat-color($success-palette, 500);
       }
     }
+
     &.mat-white {
       background-color: #000;
       border-color: #fff;
       color: #fff;
+
       & svg {
         fill: #fff;
       }
     }
+
     &.mat-disabled {
       border-color: map-get($mat-light-theme-foreground, disabled-text);
       color: map-get($mat-light-theme-foreground, disabled-text);
+
       & svg {
         fill: map-get($mat-light-theme-foreground, disabled-text);
       }
@@ -309,42 +331,53 @@ button:not([disabled]),
       /*fill: mat-color($color: $color);*/
     }
   }
+
   &.stark-delete {
     border: solid 2px $message-alert;
     color: $message-alert;
+
     & svg {
       fill: $message-alert;
     }
   }
+
   &.stark-success {
     background-color: $message-success;
     color: #fff;
+
     &:active,
     &:hover {
       background-color: $message-success-700 !important;
     }
+
     & svg {
       fill: #fff;
     }
   }
+
   &.stark-warn {
     background-color: $message-warning !important;
     color: #fff;
+
     &:active,
     &:hover {
       background-color: $message-warning-700 !important;
     }
+
     & svg {
       fill: #fff;
     }
   }
+
   &.stark-alert {
     background-color: $message-alert;
     color: #fff;
+
     &:active,
     &:hover {
       background-color: $message-alert-700 !important;
     }
   }
 }
+
 /*}*/
