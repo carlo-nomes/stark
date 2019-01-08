@@ -23,6 +23,7 @@ import {
 import { StarkAction, StarkActionBarConfig, StarkCustomizablePredefinedAction, StarkDefaultPredefinedAction } from "../../../action-bar";
 import { STARK_LOGGING_SERVICE, StarkLoggingService } from "@nationalbankbelgium/stark-core";
 import { FormGroup } from "@angular/forms";
+import { animate, state, style, transition, trigger } from "@angular/animations";
 import { AbstractStarkUiComponent } from "../../../../common/classes/abstract-component";
 
 const _isEqual: Function = require("lodash/isEqual");
@@ -71,6 +72,7 @@ interface StarkGenericSearchFormButtonsConfigRequired extends StarkGenericSearch
 @Component({
 	selector: "stark-generic-search",
 	templateUrl: "./generic-search.component.html",
+	animations: [trigger("collapse", [state("closed", style({ opacity: 0, height: 0 })), transition("* <=> closed", animate(400))])],
 	encapsulation: ViewEncapsulation.None,
 	// We need to use host instead of @HostBinding: https://github.com/NationalBankBelgium/stark/issues/664
 	host: {

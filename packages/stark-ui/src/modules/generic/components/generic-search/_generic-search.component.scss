@@ -1,14 +1,10 @@
 $button-spacing: 10px;
 
 .stark-generic-search {
-  .stark-fold-up-item {
-    transition: all 0.4s;
-
-    /* animation trigger */
-    &.stark-fold-up {
-      max-height: 0;
-      opacity: 0;
-    }
+  > form {
+    overflow: hidden;
+    box-sizing: border-box;
+    padding-bottom: 4px; // If not set `box-shadow`from buttons is cut off
   }
 
   .form-actions {
