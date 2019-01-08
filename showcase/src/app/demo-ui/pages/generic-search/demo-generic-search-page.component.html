@@ -2,9 +2,22 @@
 <section class="stark-section">
 	<h1 translate>SHOWCASE.DEMO.SHARED.EXAMPLE_VIEWER_LIST</h1>
 	<example-viewer [extensions]="[]" [exampleTitle]="'SHOWCASE.DEMO.LANGUAGE_SELECTOR.DROPDOWN' | translate">
-		<stark-generic-search formHtmlId="demo-generic-search-form" (searchTriggered)="onSearch($event)" (resetTriggered)="onReset($event)">
+		<mat-slide-toggle color="primary" [checked]="!hideSearch" (change)="hideSearch = !hideSearch">
+			{{ "SHOWCASE.DEMO.GENERIC_SEARCH.TOGGLE" | translate }}
+		</mat-slide-toggle>
+		<stark-generic-search
+			formHtmlId="demo-generic-search-form"
+			(searchTriggered)="onSearch($event)"
+			(resetTriggered)="onReset($event)"
+			[isFormHidden]="hideSearch"
+		>
 			<demo-generic-search-form #searchForm [searchCriteria]="workingCopy"></demo-generic-search-form>
 		</stark-generic-search>
-		<stark-table htmlId="demo-generic-search-table" [columnProperties]="columnsProperties" [paginationConfig]="paginationConfig" [data]="searchResults"></stark-table>
+		<stark-table
+			htmlId="demo-generic-search-table"
+			[columnProperties]="columnsProperties"
+			[paginationConfig]="paginationConfig"
+			[data]="searchResults"
+		></stark-table>
 	</example-viewer>
 </section>

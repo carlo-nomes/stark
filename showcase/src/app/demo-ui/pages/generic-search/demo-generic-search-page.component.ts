@@ -11,6 +11,8 @@ import { DEMO_GENERIC_SERVICE, DemoGenericService } from "./services";
 })
 export class DemoGenericSearchPageComponent extends AbstractStarkSearchComponent<GenericObject, GenericObjectSearchCriteria>
 	implements OnInit, OnDestroy {
+	public hideSearch: boolean;
+
 	public referenceList: ReferenceLink[] = [
 		{
 			label: "Stark Generic Search component",

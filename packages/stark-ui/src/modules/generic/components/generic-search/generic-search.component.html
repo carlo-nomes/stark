@@ -1,4 +1,4 @@
-<div class="stark-fold-up-item" [ngClass]="{ 'stark-fold-up': isFormHidden }">
+<div [@collapse]="isFormHidden && 'collapsed'" [class.collapsing]="isFormHidden">
 	<form
 		[formGroup]="genericForm"
 		*ngIf="genericForm"

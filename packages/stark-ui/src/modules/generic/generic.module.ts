@@ -7,6 +7,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { TranslateModule } from "@ngx-translate/core";
 import { StarkGenericSearchComponent } from "./components";
 import { StarkActionBarModule } from "../action-bar";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
 	declarations: [StarkGenericSearchComponent],
@@ -18,7 +19,8 @@ import { StarkActionBarModule } from "../action-bar";
 		MatIconModule,
 		MatTooltipModule,
 		StarkActionBarModule,
-		TranslateModule
+		TranslateModule,
+		BrowserAnimationsModule
 	],
 	exports: [StarkGenericSearchComponent]
 })

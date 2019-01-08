@@ -14,6 +14,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { StoreModule } from "@ngrx/store";
 import { TranslateModule } from "@ngx-translate/core";
 import { UIRouterModule } from "@uirouter/angular";
@@ -99,6 +100,7 @@ import {
 		MatTooltipModule,
 		MatSnackBarModule,
 		MatTabsModule,
+		MatSlideToggleModule,
 		TranslateModule,
 		SharedModule,
 		StarkActionBarModule,
