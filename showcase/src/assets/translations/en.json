@@ -117,7 +117,8 @@
         "INPUT3": "The included HTML elements will be copied inside the footer as the leftmost element."
       },
       "GENERIC_SEARCH": {
-        "TITLE": "Stark Generic Search"
+        "TITLE": "Stark Generic Search",
+        "TOGGLE": "Toggle search"
       },
       "HEADER": {
         "COPY_PASTE": "Then you can copy/paste this HTML into your code",
